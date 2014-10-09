@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-signin" novalidate name="registerForm" role="form">
+                <h2 class="form-signin-heading">Register</h2>
+                <div class="form-group" ng-class="{'has-error': errors.email}">
+                    <input name="email" ng-model="email" type="email" class="form-control" placeholder="Email address" required autofocus>
+                </div>
+                <div class="form-group" ng-class="{'has-error': errors.password1}">
+                    <input name="password1" ng-minlength="5" ng-model="password1" type="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="form-group" ng-minlength="5" ng-class="{'has-error': errors.password2}">
+                    <input name="password2" ng-model="password2" type="password" class="form-control" placeholder="Password again" required>
+                </div>
+                <div ng-show="errors.message" class="alert alert-dismissable alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-flash"></span>
+                    {{errors.message}}
+                </div>
+                <div class="form-group">
+                    <button ng-click="submit(registerForm)" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->
