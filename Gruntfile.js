@@ -4,15 +4,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
-      options: {
-        // banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-        sourceMap: true,
-        mangle: false,
-        beautify: true
-      },
-      build: {
-        src: ['./public/app/**/*.js'],
-        dest: 'public/dist/secure.notes.min.js'
+      dev: {
+        options: {
+          // banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+          sourceMap: true,
+          mangle: false,
+          beautify: true
+        },
+        files: {
+          'public/dist/secure.notes.min.js': ['./public/app/**/*.js']
+        }
       }
     },
     watch: {
@@ -32,6 +33,27 @@ module.exports = function(grunt) {
           failOnError: false,
         }
       }
+    },
+    replace: {
+      dev: {
+        options: {
+          patterns: [
+            {
+              match: 'apiUrl',
+              replacement: 'http://localhost:3000'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: false,
+            flatten: true,
+            src: ['./public/app/config/configTemplate.js'],
+            dest: './public/app/config/generatedConfig.js',
+          }
+        ]
+
+      }
     }
   });
 
@@ -39,8 +61,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jslint');
+  grunt.loadNpmTasks('grunt-replace');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('develop', ['replace:dev', 'uglify:dev', 'watch']);
 
 };

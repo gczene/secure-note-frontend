@@ -1,5 +1,6 @@
 angular.module('Notes', [
     'app.thirdParty',
+    'app.config',
     'app.state',
     'app.components'
 ]);

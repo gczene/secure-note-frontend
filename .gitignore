@@ -1,3 +1,5 @@
 /node_modules
 /npm-debug.log
 /public/vendor
+/public/dist
+/public/app/config/generatedConfig.js
