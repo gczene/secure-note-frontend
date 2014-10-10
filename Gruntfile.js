@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       all: {
         src: ['./public/app/**/*.js'],
         directives: {
-          globals: ['angular', 'console'],
+          globals: ['angular', 'console', 'CryptoJS'],
           unparam: true,
           nomen: true
         },

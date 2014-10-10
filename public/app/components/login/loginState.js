@@ -4,7 +4,7 @@ angular.module('app.components.login.state', [])
         $stateProvider
             .state('login', {
                 abstract: false,
-                authNeeded: true,
+                authNeeded: false,
                 url: "/login",
                 views: {
                     '@': {

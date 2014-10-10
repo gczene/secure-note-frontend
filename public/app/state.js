@@ -8,6 +8,11 @@ angular.module('app.state', [])
                 abstract: false,
                 authNeeded: true,
                 url: "/",
-                template: "home"
+                views: {
+                    '@' : {
+                        templateUrl: '/app/components/home/views/home.html',
+                        controller: 'homeCtrl'
+                    }
+                }
             });
     });

@@ -8,11 +8,16 @@ angular.module('Notes', [
 
 angular.module('app.thirdParty', [
     'ui.bootstrap',
-    'ui.router'
+    'ui.router',
+    'angularSpinner'
 ]);
 
 angular.module('app.components', [
     'app.components.auth',
+    'app.components.error',
+    'app.components.home',
     'app.components.login',
-    'app.components.register'
+    'app.components.note',
+    'app.components.register',
+    'app.components.user'
 ]);

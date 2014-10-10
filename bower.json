@@ -20,6 +20,7 @@
     "angular-resource": "~1.2.26",
     "angular-bootstrap": "~0.11.2",
     "angular-ui-router": "~0.2.11",
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "angular-spinner": "~0.5.1"
   }
 }
