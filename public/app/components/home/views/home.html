@@ -1,16 +1,30 @@
+
+
 <div class="container-fluid">
     <div class="page-header">
-      <h1>Your notes: <small>{{key}}</small></h1>
+      <h1>Your notes: <small></small></h1>
     </div>
 
-    <div class="row" ng-show="!keyAdded">
+
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Please add your translater key! (Will be stored locally only!)
+                <div ng-click="collapseKey = !collapseKey" class="panel-heading">
+                    <span ng-class="{'glyphicon-plus-sign': collapseKey, 'glyphicon-minus-sign': !collapseKey}" class="glyphicon pull-right"></span>
+
+                    <span ng-if="keyAdded">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        If your notes are not readeble you passed wrong key probably!
+                    </span>
+                    <span ng-if="!keyAdded">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Please add your translater key! (Will be stored locally only!)
+                    </span>
                 </div>
-                <div class="panel-body">
-                    <p>Be aware of loosing your key leads to loose your data! Do not forget it!</p>
+                <div class="panel-body" collapse="collapseKey">
+                    <div class="alert alert-warning" role="alert">
+                        <p>Be aware of loosing your key leads to loose your data! Do not forget it!</p>
+                    </div>
                     <form class="form" role="form" ng-submit="setKey()" name="keyForm">
                         <div class="form-group">
                             <input ng-model="key" class="form-control" type="password" placeholder="Translater key">
@@ -30,6 +44,7 @@
             <div class="panel panel-default">
                 <div ng-click="isCollapsed = !isCollapsed" class="panel-heading">
                     <span ng-class="{'glyphicon-plus-sign': isCollapsed, 'glyphicon-minus-sign': !isCollapsed}" class="glyphicon pull-right"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
                     Add a new note
                 </div>
                 <div class="panel-body" collapse="isCollapsed">
@@ -65,7 +80,10 @@
         </div>
     </div>
 
-    <div class="row">
+
+
+
+    <div class="row" ng-show="keyAdded || notes.length">
         <div class="col-sm-6 col-sm-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -81,7 +99,7 @@
                     <!-- List group -->
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="note in notes| filter: search">
-                            <a href="/#/{{note._id}}">
+                            <a href="/#/" ng-click="showDetails(note)">
                                 {{note.label}}
                                 <span class="pull-right">{{note.createdAt | date:'medium'}}</span>
                             </a>

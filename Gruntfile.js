@@ -29,11 +29,12 @@ module.exports = function(grunt) {
         directives: {
           globals: ['angular', 'console', 'CryptoJS'],
           unparam: true,
-          nomen: true
+          nomen: true,
+          regexp: true
         },
         options: {
           errorsOnly: true,
-          failOnError: false,
+          failOnError: false
         }
       }
     },

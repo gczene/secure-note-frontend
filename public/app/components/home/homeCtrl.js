@@ -1,5 +1,12 @@
 angular.module('app.components.home.ctrl', [])
-    .controller('homeCtrl', function ($scope, usSpinnerService, noteResource, noteService, errorService) {
+    .controller('homeCtrl', function (
+        $scope,
+        usSpinnerService,
+        noteResource,
+        noteService,
+        errorService,
+        $modal
+    ) {
         'use strict';
         // var encrypted = CryptoJS.AES.encrypt("Alma", "Secret Passphrase"),
         //     decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase"),
@@ -10,15 +17,35 @@ angular.module('app.components.home.ctrl', [])
             obj = {};
 
         $scope.isCollapsed = true;
-        // console.log(encrypted.toString());
-        // console.log(decrypted.toString(CryptoJS.enc.Utf8));
-
-        // str = 'U2FsdGVkX1//M2QeBj1dz9AOCWNbHTBTGgNQGtcMlJA=';
-
-        // console.log(CryptoJS.AES.decrypt(str, "Secret Passphrase")
-        //     .toString(CryptoJS.enc.Utf8));
-
+        $scope.collapseKey = false;
+        $scope.isDetail = false;
         $scope.loader = false;
+
+        $scope.showDetails = function (note) {
+            var modalInstance;
+
+            modalInstance = $modal.open({
+                templateUrl: '/app/components/home/views/details.html',
+                controller: 'detailsCtrl',
+                size: 'lg',
+                resolve: {
+                    note: function () {
+                        return note;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (deletedNote) {
+                angular.forEach($scope.notes, function (obj, index) {
+                    if (obj === deletedNote) {
+                        $scope.notes.splice(index, 1);
+                    }
+                });
+                console.log('deleted', deletedNote);
+            }, function () {
+                console.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.startSpin = function () {
             usSpinnerService.spin('spinner-1');
@@ -33,6 +60,7 @@ angular.module('app.components.home.ctrl', [])
             if ($scope.key.length >= 5) {
                 $scope.keyAdded = true;
                 self.decrypt();
+                $scope.collapseKey = true;
             }
         };
 
@@ -57,11 +85,12 @@ angular.module('app.components.home.ctrl', [])
             .then(function (resp) {
                 $scope.notes = resp.notes;
                 originalList = [].concat(resp.notes);
+
             })
             .catch(errorService.handle());
 
         this.decrypt = function () {
-            $scope.notes = [].concat(originalList);
+            $scope.notes = angular.copy(originalList);
             angular.forEach($scope.notes, function (note, index) {
                 note.label = dc(note.label, $scope.key)
                         .toString(CryptoJS.enc.Utf8);
@@ -70,4 +99,34 @@ angular.module('app.components.home.ctrl', [])
             });
         };
 
+    })
+    .controller('detailsCtrl', function ($scope, $modalInstance, note, noteResource, $window) {
+        'use strict';
+        $scope.note = note;
+
+        $scope.ok = function () {
+            $modalInstance.dismiss('Cancel');
+        };
+
+        $scope.delete = function (note) {
+            if ($window.confirm('Are you sure?')) {
+                noteResource.delete({id: note._id})
+                    .$promise
+                    .then(function (resp) {
+                        $modalInstance.close(note);
+                    });
+            }
+        };
+
+    })
+    .filter('nl2br', function ($sce) {
+        'use strict';
+
+        return function (msg, is_xhtml) {
+            is_xhtml = is_xhtml || true;
+            var breakTag = is_xhtml ? '<br />' : '<br>';
+            msg = (msg + ' ')
+                .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+            return $sce.trustAsHtml(msg);
+        };
     });
