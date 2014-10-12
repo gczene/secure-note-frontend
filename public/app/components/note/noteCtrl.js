@@ -1,5 +1,5 @@
-angular.module('app.components.home.ctrl', [])
-    .controller('homeCtrl', function (
+angular.module('app.components.note.ctrl', [])
+    .controller('noteCtrl', function (
         $scope,
         usSpinnerService,
         noteResource,
@@ -8,6 +8,9 @@ angular.module('app.components.home.ctrl', [])
         $modal
     ) {
         'use strict';
+        // var encrypted = CryptoJS.AES.encrypt("Alma", "Secret Passphrase"),
+        //     decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase"),
+        //     str,
         var originalList,
             self = this,
             dc = CryptoJS.AES.decrypt,
@@ -22,7 +25,7 @@ angular.module('app.components.home.ctrl', [])
             var modalInstance;
 
             modalInstance = $modal.open({
-                templateUrl: '/app/components/home/views/details.html',
+                templateUrl: '/app/components/note/views/details.html',
                 controller: 'detailsCtrl',
                 size: 'lg',
                 resolve: {
@@ -147,20 +150,4 @@ angular.module('app.components.home.ctrl', [])
                 .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
             return $sce.trustAsHtml(msg);
         };
-    })
-    .controller('tryItCtrl', function ($scope) {
-        'use strict';
-        $scope.tryIt = {
-            key: '',
-            text: ''
-        };
-
-        $scope.decrypt = function () {
-            if ($scope.tryIt.text) {
-                $scope.output = CryptoJS.AES.encrypt($scope.tryIt.text, $scope.tryIt.key).toString();
-            } else {
-                $scope.output = '';
-            }
-        };
-
     });

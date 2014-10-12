@@ -6,6 +6,7 @@ angular.module('app.components.login.state', [])
                 abstract: false,
                 authNeeded: false,
                 url: "/login",
+                parent: 'parent',
                 views: {
                     '@': {
                         templateUrl: '/app/components/login/views/login.html',

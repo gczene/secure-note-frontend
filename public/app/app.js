@@ -17,6 +17,7 @@ angular.module('app.components', [
     'app.components.error',
     'app.components.home',
     'app.components.login',
+    'app.components.navbar',
     'app.components.note',
     'app.components.register',
     'app.components.user'

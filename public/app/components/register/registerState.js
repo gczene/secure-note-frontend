@@ -5,6 +5,7 @@ angular.module('app.components.register.state', [])
             .state('register', {
                 abstract: false,
                 authNeeded: false,
+                parent: 'parent',
                 url: '/register',
                 views: {
                     '@': {

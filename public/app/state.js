@@ -4,15 +4,19 @@ angular.module('app.state', [])
         'use strict';
         $urlRouterProvider.otherwise("/");
         $stateProvider
-            .state('home', {
-                abstract: false,
-                authNeeded: true,
-                url: "/",
+            .state('parent', {
+                abstract: true,
                 views: {
-                    '@' : {
-                        templateUrl: '/app/components/home/views/home.html',
-                        controller: 'homeCtrl'
+                    navbar: {
+                        templateUrl: '/app/components/navbar/views/navbar.html',
+                        controller: 'navbarCtrl'
                     }
                 }
+            })
+            .state('home', {
+                abstract: false,
+                authNeeded: false,
+                parent: 'parent',
+                url: "/"
             });
     });
