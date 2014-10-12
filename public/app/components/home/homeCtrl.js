@@ -31,6 +31,9 @@ angular.module('app.components.home.ctrl', [])
                 resolve: {
                     note: function () {
                         return note;
+                    },
+                    key: function () {
+                        return $scope.key;
                     }
                 }
             });
@@ -41,9 +44,10 @@ angular.module('app.components.home.ctrl', [])
                         $scope.notes.splice(index, 1);
                     }
                 });
-                console.log('deleted', deletedNote);
-            }, function () {
-                console.info('Modal dismissed at: ' + new Date());
+            }, function (reason) {
+                if (reason.reason === 'update') {
+                    console.log(reason.note);
+                }
             });
         };
 
@@ -100,12 +104,13 @@ angular.module('app.components.home.ctrl', [])
         };
 
     })
-    .controller('detailsCtrl', function ($scope, $modalInstance, note, noteResource, $window) {
+    .controller('detailsCtrl', function ($scope, $modalInstance, note, noteResource, $window, key) {
         'use strict';
         $scope.note = note;
+        $scope.editing = false;
 
         $scope.ok = function () {
-            $modalInstance.dismiss('Cancel');
+            $modalInstance.dismiss({reason: 'Cancel', note: $scope.note});
         };
 
         $scope.delete = function (note) {
@@ -116,6 +121,22 @@ angular.module('app.components.home.ctrl', [])
                         $modalInstance.close(note);
                     });
             }
+        };
+
+        $scope.update = function () {
+            noteResource.update({id: $scope.note._id}, {
+                label: CryptoJS.AES.encrypt($scope.note.label, key).toString(),
+                description: CryptoJS.AES.encrypt($scope.note.description, key).toString(),
+            });
+            $modalInstance.dismiss({reason: 'update', note: $scope.note});
+        };
+
+        $scope.edit = function () {
+            $scope.editing = true;
+        };
+
+        $scope.cancelEdit = function () {
+            $scope.editing = false;
         };
 
     })
