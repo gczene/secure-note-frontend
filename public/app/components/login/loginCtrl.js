@@ -29,7 +29,7 @@ angular.module('app.components.login.ctrl', [])
                     .$promise
                     .then(function (resp) {
                         userService.setSession({sessionId: resp.sessionId});
-                        $state.go('home');
+                        $state.go('notes');
                     })
                     .catch(function (err) {
                         if (err.status === 401) {

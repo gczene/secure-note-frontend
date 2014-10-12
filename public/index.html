@@ -12,7 +12,7 @@
     <div ui-view="navbar">nav</div>
 
 
-    <div class="container">
+    <div class="container" ng-controller="tryItCtrl" ng-show="isHome">
 
         <div class="jumbotron">
           <h1>Store your notes in non-readable format!</h1>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6" ng-controller="tryItCtrl">
+            <div class="col-md-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         Try it out!
