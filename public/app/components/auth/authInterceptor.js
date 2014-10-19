@@ -17,7 +17,7 @@ angular.module('app.components.auth.interceptor', [])
                 return request || $q.when(request);
             },
             response: function (response) {
-                if (response.status !== undefined) {
+                if ((response.status !== undefined) && (typeof response.data === 'object' )) {
                     response.data.status = response.status;
                 }
                 return response || $q.when(response);

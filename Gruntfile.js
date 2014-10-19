@@ -56,7 +56,24 @@ module.exports = function(grunt) {
             dest: './public/app/config/generatedConfig.js',
           }
         ]
-
+      },
+      production: {
+        options: {
+          patterns: [
+            {
+              match: 'apiUrl',
+              replacement: 'http://api.secure-notes.xyz'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: false,
+            flatten: true,
+            src: ['./public/app/config/configTemplate.js'],
+            dest: './public/app/config/generatedConfig.js',
+          }
+        ]
       }
     }
   });
