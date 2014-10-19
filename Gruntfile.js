@@ -14,6 +14,17 @@ module.exports = function(grunt) {
         files: {
           'public/dist/secure.notes.min.js': ['./public/app/**/*.js']
         }
+      },
+      production: {
+        options: {
+          // banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+          sourceMap: false,
+          mangle: true,
+          beautify: false
+        },
+        files: {
+          'public/dist/secure.notes.min.js': ['./public/dist/annotate.js']
+        }
       }
     },
     watch: {
@@ -75,6 +86,16 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    ngAnnotate: {
+        options: {
+            singleQuotes: true
+        },
+        all: {
+            files: {
+                'public/dist/annotate.js': './public/app/**/*.js'
+            }
+        }
     }
   });
 
@@ -83,9 +104,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-jslint');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('develop', ['replace:dev', 'uglify:dev', 'watch']);
+  grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production']);
 
 };
