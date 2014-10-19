@@ -56,6 +56,22 @@ module.exports = function(grunt) {
             {
               match: 'apiUrl',
               replacement: 'http://localhost:3000'
+            },
+            {
+              match: 'bootstrapCss',
+              replacement: './vendor/bootstrap/dist/css/bootstrap.min.css'
+            },
+            {
+              match: 'angularJs',
+              replacement: './vendor/angular/angular.min.js'
+            },
+            {
+              match: 'angular-UI-Js',
+              replacement: './vendor/angular-ui-router/release/angular-ui-router.min.js'
+            },
+            {
+              match: 'angular-resource',
+              replacement: './vendor/angular-resource/angular-resource.min.js'
             }
           ]
         },
@@ -65,6 +81,12 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['./public/app/config/configTemplate.js'],
             dest: './public/app/config/generatedConfig.js',
+          },
+          {
+            expand: false,
+            flatten: true,
+            src: ['./public/index-template.html'],
+            dest: './public/index.html',
           }
         ]
       },
@@ -74,6 +96,22 @@ module.exports = function(grunt) {
             {
               match: 'apiUrl',
               replacement: 'http://api.secure-notes.xyz'
+            },
+            {
+              match: 'bootstrapCss',
+              replacement: '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+            },
+            {
+              match: 'angularJs',
+              replacement: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js'
+            },
+            {
+              match: 'angular-UI-Js',
+              replacement: '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.11/angular-ui-router.min.js'
+            },
+            {
+              match: 'angular-resource',
+              replacement: 'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js'
             }
           ]
         },
@@ -83,6 +121,12 @@ module.exports = function(grunt) {
             flatten: true,
             src: ['./public/app/config/configTemplate.js'],
             dest: './public/app/config/generatedConfig.js',
+          },
+          {
+            expand: false,
+            flatten: true,
+            src: ['./public/index-template.html'],
+            dest: './public/index.html',
           }
         ]
       }
