@@ -27,12 +27,29 @@ module.exports = function(grunt) {
         }
       }
     },
+    html2js: {
+        options: {
+            base: 'public/',
+            useStrict: true,
+            rename: function (name) {
+                return '/' + name;
+            },
+            htmlmin: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        },
+        main: {
+            src: ['public/app/**/*.html'],
+            dest: 'public/app/templates.js'
+        }
+    },
     watch: {
       options: {
         livereload: true
       },
-      files: './public/app/**/*.js',
-      tasks: ['jslint', 'uglify']
+      files: ['./public/app/**/*.html', './public/app/**/*.js'],
+      tasks: ['html2js', 'jslint', 'uglify:dev']
     },
     jslint: {
       all: {
@@ -46,7 +63,10 @@ module.exports = function(grunt) {
         options: {
           errorsOnly: true,
           failOnError: false
-        }
+        },
+        exclude: [
+            './public/app/templates.js'
+        ]
       }
     },
     replace: {
@@ -149,10 +169,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jslint');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-ng-annotate');
+  grunt.loadNpmTasks('grunt-html2js');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('develop', ['replace:dev', 'uglify:dev', 'watch']);
+  grunt.registerTask('develop', ['replace:dev', 'html2js', 'uglify:dev', 'watch']);
   grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production']);
 
 };
