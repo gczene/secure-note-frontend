@@ -1,6 +1,10 @@
 angular.module('app.components.auth.ctrl', [])
-    .controller('authCtrl', function ($scope, $state, $rootScope, userService) {
+    .controller('authCtrl', function ($scope, $state, $rootScope, userService, $http, config) {
         'use strict';
+
+        $http.get(config.apiUrl);
+
+        $scope.isLoggedIn = userService.sessionExists();
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $state.current = toState;
@@ -9,5 +13,16 @@ angular.module('app.components.auth.ctrl', [])
                 $state.go('login');
             }
         });
+
+        $scope.$watch(function () {
+            return userService.sessionExists();
+        }, function (newValue, oldValue) {
+            $scope.isLoggedIn = newValue;
+        });
+
+        $scope.logout = function () {
+            userService.removeSession();
+            $state.go('home');
+        };
 
     });
