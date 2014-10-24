@@ -5,6 +5,7 @@ angular.module('app.components.note.ctrl', [])
         noteResource,
         noteService,
         errorService,
+        userService,
         $modal
     ) {
         'use strict';
@@ -20,6 +21,7 @@ angular.module('app.components.note.ctrl', [])
         $scope.collapseKey = false;
         $scope.isDetail = false;
         $scope.loader = false;
+        $scope.notes = [];
 
         $scope.showDetails = function (note) {
             var modalInstance;
@@ -69,8 +71,8 @@ angular.module('app.components.note.ctrl', [])
         };
 
         $scope.submit = function (form) {
-            $scope.formError = form.$invalid;
-            if (form.$valid) {
+            $scope.formError = form.$invalid || !$scope.hasAccess;
+            if (form.$valid && $scope.hasAccess) {
                 obj = angular.extend({}, $scope.note);
                 $scope.note.label = CryptoJS.AES.encrypt($scope.note.label, $scope.key).toString();
                 $scope.note.description = CryptoJS.AES.encrypt($scope.note.description, $scope.key).toString();
@@ -80,6 +82,7 @@ angular.module('app.components.note.ctrl', [])
                     .then(function (resp) {
                         $scope.note = {};
                         $scope.notes.unshift(angular.extend(resp, obj));
+                        $scope.hasAccess = ($scope.notes.length < 10) || userService.getSession().subscribed;
                         $scope.stopSpin();
                     });
             }
@@ -89,7 +92,7 @@ angular.module('app.components.note.ctrl', [])
             .then(function (resp) {
                 $scope.notes = resp.notes;
                 originalList = [].concat(resp.notes);
-
+                $scope.hasAccess = ($scope.notes.length < 10) || userService.getSession().subscribed;
             })
             .catch(errorService.handle());
 

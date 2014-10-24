@@ -52,19 +52,24 @@
                         <div class="form-group">
                             <label for="label" class="col-sm-1 control-label">Label</label>
                             <div class="col-sm-10">
-                                <input type="text" ng-model="note.label" ng-minlength="3" id="label" class="form-control" required placeholder="label">
+                                <input ng-minlength="3" ng-maxlength="150" type="text" ng-model="note.label" id="label" class="form-control" required placeholder="label">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="note" class="col-sm-1 control-label">Note</label>
                             <div class="col-sm-10">
-                                <textarea style="height: 200px;" ng-minlength="3" ng-model="note.description" placeholder="Your note" id="note" class="form-control" required></textarea>
+                                <textarea style="height: 200px;" ng-minlength="3" maxlength="1000" ng-maxlength="1000" ng-model="note.description" placeholder="Your note" id="note" class="form-control" required></textarea>
                             </div>
                         </div>
                         <div class="form-group" ng-show="formError">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <div class="alert alert-danger" role="alert">
+                                    <span ng-if="hasAccesss">
                                     Note and Label: minimum 3 characters
+                                    </span>
+                                    <span ng-if="!hasAccess">
+                                        You reached the limit! Please subscribe!
+                                    </span>
                                 </div>
                             </div>
                         </div>

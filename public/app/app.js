@@ -3,7 +3,8 @@ angular.module('Notes', [
     'app.config',
     'app.state',
     'ngResource',
-    'app.components'
+    'app.components',
+    'templates-main'
 ]);
 
 angular.module('app.thirdParty', [

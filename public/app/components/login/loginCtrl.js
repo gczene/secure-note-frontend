@@ -28,7 +28,7 @@ angular.module('app.components.login.ctrl', [])
                 })
                     .$promise
                     .then(function (resp) {
-                        userService.setSession({sessionId: resp.sessionId});
+                        userService.setSession({sessionId: resp.sessionId, subscribed: resp.subscribed});
                         $state.go('notes');
                     })
                     .catch(function (err) {
