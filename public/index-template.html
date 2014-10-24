@@ -19,11 +19,42 @@
 
         <div class="jumbotron">
           <h1>Store your notes in non-readable format!</h1>
-          <p>It is a simple application for your rare used but sensitive notes</p>
+          <p>It is a simple application for your rare used but sensitive notes.</p>
 
         </div>
 
         <div class="row">
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        How does it work?
+                    </div>
+                    <div class="panel-body">
+                    <p>
+                        Before we save your notes we translate (encrypt) it in your browser to a secure non-readable format based on a
+                        translator key given by you. <br />
+                        The process based on AES. <a href="http://hu.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank">You can see more here.</a>
+                    </p>
+                    <p class="alert alert-info">The key is not saved! If you forget it you can't get you data anymore!</p>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        When should you use it?
+                    </div>
+                    <div class="panel-body">
+
+                    <ul>
+                        <li>if you want to store sensitive information which is available anytime on the web.</li>
+                        <li>if you use those information rare and you forget where you noted that</li>
+                    </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
             <div class="col-md-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -31,7 +62,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="tryItKey">Give a tranlator key</label>
+                            <label for="tryItKey">Give your tranlator key</label>
                             <input type="text" ng-keyup="decrypt()" ng-model="tryIt.key" id="tryItKey" class="form-control" placeholder="Key">
                         </div>
                         <div class="form-group">
@@ -49,30 +80,6 @@
             </div>
 
 
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Check this out if you are the same in
-                    </div>
-                    <div class="panel-body">
-                    <ul>
-                        <li>loosing ID numbers e.g. NI number</li>
-                        <li>forgetting where you put your council tax reference</li>
-                        <li>and you have more 20 similar information but not trust in services who store them in usual text format</li>
-                    </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        What is the difference ?
-                    </div>
-                    <div class="panel-body">
-                    Before we save your notes we translate it in your browser to a secure non-readable format based on a
-                    translator key given by you.
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

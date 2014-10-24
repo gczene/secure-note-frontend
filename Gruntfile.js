@@ -48,8 +48,8 @@ module.exports = function(grunt) {
       options: {
         livereload: true
       },
-      files: ['./public/app/**/*.html', './public/app/**/*.js'],
-      tasks: ['html2js', 'jslint', 'uglify:dev']
+      files: ['./public/app/**/*.html', './public/app/**/*.js', './public/index-template.html'],
+      tasks: ['html2js', 'replace:dev', 'jslint', 'uglify:dev']
     },
     jslint: {
       all: {
