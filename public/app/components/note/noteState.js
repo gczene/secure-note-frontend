@@ -12,6 +12,9 @@ angular.module('app.components.note.state', [])
                     '@' : {
                         templateUrl: '/app/components/note/views/notes.html',
                         controller: 'noteCtrl'
+                    },
+                    'paypal@notes': {
+                        templateUrl: '/app/components/paypal/views/paypal.html'
                     }
                 }
             });

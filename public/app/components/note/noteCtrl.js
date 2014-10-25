@@ -15,13 +15,17 @@ angular.module('app.components.note.ctrl', [])
         var originalList,
             self = this,
             dc = CryptoJS.AES.decrypt,
-            obj = {};
+            obj = {},
+            hasAccess = function () {
+                return ($scope.notes.length < 10) || userService.getSession().subscribed;
+            };
 
         $scope.isCollapsed = true;
         $scope.collapseKey = false;
         $scope.isDetail = false;
         $scope.loader = false;
         $scope.notes = [];
+        $scope.sessionId = userService.getSession().sessionId;
 
         $scope.showDetails = function (note) {
             var modalInstance;
@@ -82,7 +86,7 @@ angular.module('app.components.note.ctrl', [])
                     .then(function (resp) {
                         $scope.note = {};
                         $scope.notes.unshift(angular.extend(resp, obj));
-                        $scope.hasAccess = ($scope.notes.length < 10) || userService.getSession().subscribed;
+                        $scope.hasAccess = hasAccess();
                         $scope.stopSpin();
                     });
             }
@@ -92,7 +96,7 @@ angular.module('app.components.note.ctrl', [])
             .then(function (resp) {
                 $scope.notes = resp.notes;
                 originalList = [].concat(resp.notes);
-                $scope.hasAccess = ($scope.notes.length < 10) || userService.getSession().subscribed;
+                $scope.hasAccess = hasAccess();
             })
             .catch(errorService.handle());
 
