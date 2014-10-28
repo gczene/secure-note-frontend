@@ -6,7 +6,11 @@ angular.module('app.components.paypal.done.ctrl', [])
         if (session && session.sessionId) {
             loginService.refreshSession()
                 .then(function (resp) {
-                    userService.setSession({sessionId: resp.sessionId, subscribed: resp.subscribed});
+                    userService.setSession({
+                        sessionId: resp.sessionId,
+                        subscribed: resp.subscribed,
+                        expireAt: resp.expireAt
+                    });
                     $state.go('notes');
                 });
         }
