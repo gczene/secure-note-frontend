@@ -14,6 +14,8 @@ angular.module('app.components.auth.ctrl', [])
             }
         });
 
+        $scope.email = 'gabo';
+
         $scope.$watch(function () {
             return userService.sessionExists();
         }, function (newValue, oldValue) {
@@ -25,4 +27,6 @@ angular.module('app.components.auth.ctrl', [])
             $state.go('home');
         };
 
+        $scope.email = $scope.email + 'r@';
+        $scope.email = $scope.email + 'czene.co.uk';
     });

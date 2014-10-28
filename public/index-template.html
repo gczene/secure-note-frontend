@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Secure Notes</title>
     <link rel="stylesheet" type="text/css" href="@@bootstrapCss">
-    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/slate/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.2.0+2/slate/bootstrap.css">
 
 </head>
 
@@ -86,6 +86,23 @@
 
 
     <div ui-view></div>
+    <footer class="container">
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <p>
+                    Made by Gabor Czene
+                </p>
+                <p>
+                    Git repo for frontend <a href="https://github.com/gczene/secure-note-frontend" target="blank">https://github.com/gczene/secure-note-frontend</a>
+                </p>
+            </div>
+            <div class="col-lg-6">
+                            <p>Contact: {{email}}</p>
+            </div>
+        </div>
+
+    </footer>
 </body>
     <script src="@@angularJs"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js"></script>
