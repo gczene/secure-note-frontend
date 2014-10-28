@@ -20,6 +20,7 @@ angular.module('app.components', [
     'app.components.login',
     'app.components.navbar',
     'app.components.note',
+    'app.components.paypal',
     'app.components.register',
     'app.components.user'
 ]);

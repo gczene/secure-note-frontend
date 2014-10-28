@@ -5,6 +5,9 @@ angular.module('app.components.login.resource', [])
         return $resource(config.apiUrl + '/auth', {}, {
             login: {
                 method: 'POST'
+            },
+            refreshSession: {
+                method: 'GET'
             }
         });
 

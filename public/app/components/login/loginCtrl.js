@@ -28,7 +28,11 @@ angular.module('app.components.login.ctrl', [])
                 })
                     .$promise
                     .then(function (resp) {
-                        userService.setSession({sessionId: resp.sessionId, subscribed: resp.subscribed});
+                        userService.setSession({
+                            sessionId: resp.sessionId,
+                            subscribed: resp.subscribed,
+                            expireAt: resp.expireAt
+                        });
                         $scope.isLoggedIn = userService.sessionExists();
                         $state.go('notes');
                     })
