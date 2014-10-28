@@ -26,6 +26,8 @@ angular.module('app.components.note.ctrl', [])
         $scope.loader = false;
         $scope.notes = [];
         $scope.sessionId = userService.getSession().sessionId;
+        $scope.expireAt = userService.getSession().expireAt;
+        $scope.subscribed = userService.getSession().subscribed;
 
         $scope.showDetails = function (note) {
             var modalInstance;

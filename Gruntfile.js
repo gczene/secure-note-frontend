@@ -160,6 +160,19 @@ module.exports = function(grunt) {
                 'public/dist/annotate.js': './public/app/**/*.js'
             }
         }
+    },
+    'sftp-deploy': {
+      build: {
+        auth: {
+          host: 'avantime.at',
+          port: 22,
+          authKey: 'privateKeyCustom'
+        },
+        cache: false,
+        src: './public',
+        dest: '/var/www/secure-notes.xyz/',
+        progress: true
+      }
     }
   });
 
@@ -170,10 +183,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-sftp-deploy');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('develop', ['replace:dev', 'html2js', 'uglify:dev', 'watch']);
-  grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production']);
+  grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production', 'sftp-deploy']);
 
 };

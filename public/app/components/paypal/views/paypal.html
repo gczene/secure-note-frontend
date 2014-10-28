@@ -1,5 +1,5 @@
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default" ng-if="!hasAccess">
+            <div class="panel panel-default" ng-if="!subscribed">
                 <div class="panel-heading">Extend your access</div>
                 <div class="panel-body">
                     <p>
@@ -27,7 +27,7 @@
                         </form>
                 </div>
             </div>
-            <div class="panel panel-default" ng-if="hasAccess">
+            <div class="panel panel-default" ng-if="subscribed">
                 <div class="panel-heading">You have extended access until {{expireAt | date: 'dd MMM yyyy'}}</div>
             </div>
 
