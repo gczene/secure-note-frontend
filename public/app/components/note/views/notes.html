@@ -17,12 +17,16 @@
                         If your notes are not readeble you passed wrong key probably!
                     </span>
                     <span ng-if="!keyAdded">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        Please add your translater key! (Will be stored locally only!)
+
+                        <h4>
+                            <span class="label label-default">1</span>
+                            Please add your translater key!
+                        </h4>
                     </span>
                 </div>
                 <div class="panel-body" collapse="collapseKey">
                     <div class="alert alert-warning" role="alert">
+                        <p>(Will be stored locally only!)</p>
                         <p>Be aware of loosing your key leads to loose your data! Do not forget it!</p>
                     </div>
                     <form class="form" role="form" ng-submit="setKey()" name="keyForm">
@@ -39,23 +43,25 @@
         </div>
     </div>
 
-    <div class="row" ui-view="paypal">
-        paypal here
+    <div class="row" ui-view="paypal"></div>
 
-    </div>
-
-
-
-    <div class="row" ng-show="keyAdded">
+    <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div ng-click="isCollapsed = !isCollapsed" class="panel-heading">
                     <span ng-class="{'glyphicon-plus-sign': isCollapsed, 'glyphicon-minus-sign': !isCollapsed}" class="glyphicon pull-right"></span>
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Add a new note
+                        <h4>
+                            <span class="label label-default">2</span>
+                            Add a new note
+                        </h4>
+
                 </div>
                 <div class="panel-body" collapse="isCollapsed">
-                    <form class="form-horizontal" novalidate name="noteForm" role="form">
+                <div class="alert alert-info" ng-show="!keyAdded">
+                    Please add your key at step 1!
+                </div>
+
+                    <form ng-show="keyAdded" class="form-horizontal" novalidate name="noteForm" role="form">
                         <div class="form-group">
                             <label for="label" class="col-sm-1 control-label">Label</label>
                             <div class="col-sm-10">
@@ -99,7 +105,10 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Note list
+                        <h4>
+                            <span class="label label-default">3</span>
+                            Note list
+                        </h4>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
