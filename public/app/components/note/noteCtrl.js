@@ -6,7 +6,8 @@ angular.module('app.components.note.ctrl', [])
         noteService,
         errorService,
         userService,
-        $modal
+        $modal,
+        config
     ) {
         'use strict';
         // var encrypted = CryptoJS.AES.encrypt("Alma", "Secret Passphrase"),
@@ -28,6 +29,7 @@ angular.module('app.components.note.ctrl', [])
         $scope.sessionId = userService.getSession().sessionId;
         $scope.expireAt = userService.getSession().expireAt;
         $scope.subscribed = userService.getSession().subscribed;
+        $scope.sandbox = config.sandbox;
 
         $scope.showDetails = function (note) {
             var modalInstance;
