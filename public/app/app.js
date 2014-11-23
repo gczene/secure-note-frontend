@@ -10,6 +10,7 @@ angular.module('Notes', [
 angular.module('app.thirdParty', [
     'ui.bootstrap',
     'ui.router',
+    'googleplus',
     'angularSpinner'
 ]);
 

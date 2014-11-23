@@ -3,7 +3,6 @@ angular.module('app.components.login.service', [])
         'use strict';
         return {
             refreshSession: function () {
-                console.log('refreshing session');
                 return loginResource.refreshSession({})
                     .$promise;
             }

@@ -6,6 +6,10 @@ angular.module('app.components.login.resource', [])
             login: {
                 method: 'POST'
             },
+            googleLogin: {
+                url: config.apiUrl + '/auth/google',
+                method: 'POST'
+            },
             refreshSession: {
                 method: 'GET'
             }

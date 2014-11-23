@@ -21,6 +21,7 @@
     "angular-bootstrap": "~0.11.2",
     "angular-ui-router": "~0.2.11",
     "bootstrap": "~3.2.0",
-    "angular-spinner": "~0.5.1"
+    "angular-spinner": "~0.5.1",
+    "angular-google-plus": "~0.1.2"
   }
 }

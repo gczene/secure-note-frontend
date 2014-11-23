@@ -5,4 +5,11 @@ angular.module('app.config', ['app.generatedConfig'])
             apiUrl: generatedConfig.apiUrl,
             sandbox: false
         };
-    });
+    })
+    .config(['GooglePlusProvider', function (GooglePlusProvider) {
+        'use strict';
+        GooglePlusProvider.init({
+            clientId: '247186165719-m3hjfotbaq7obghetqqps96t36hk21ib.apps.googleusercontent.com',
+            apiKey: 'AT8mIqmCgBmANI0L5Lbu3e5s'
+        });
+    }]);
