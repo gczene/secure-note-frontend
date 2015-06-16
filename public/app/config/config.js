@@ -1,11 +1,11 @@
 angular.module('app.config', ['app.generatedConfig'])
-    .factory('config', function (generatedConfig) {
+    .factory('config', ['generatedConfig', function (generatedConfig) {
         'use strict';
         return {
             apiUrl: generatedConfig.apiUrl,
             sandbox: false
         };
-    })
+    }])
     .config(['GooglePlusProvider', function (GooglePlusProvider) {
         'use strict';
         GooglePlusProvider.init({

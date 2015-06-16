@@ -23,8 +23,19 @@ module.exports = function(grunt) {
           beautify: false
         },
         files: {
-          'public/dist/secure.notes.min.js': ['./public/dist/annotate.js']
+          'public/dist/secure.notes.min.js': ['./public/app/**/*.js']
         }
+
+        // options: {
+        //   // banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        //   sourceMap: false,
+        //   mangle: true,
+        //   beautify: false
+        // },
+        // files: {
+        //   // 'public/dist/secure.notes.min.js': ['./public/dist/annotate.js']
+        //   'public/dist/secure.notes.min.js': ['./public/app/**/*.js']
+        // }
       }
     },
     html2js: {
@@ -74,6 +85,10 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
+              match: 'bootstrap-ui',
+              replacement: './vendor/angular-bootstrap/ui-bootstrap-tpls.min.js'
+            },
+            {
               match: 'apiUrl',
               replacement: 'http://localhost:3000'
             },
@@ -114,6 +129,11 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
+              match: 'bootstrap-ui',
+              // replacement: 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js'
+              replacement: './vendor/angular-bootstrap/ui-bootstrap-tpls.min.js'
+            },
+            {
               match: 'apiUrl',
               replacement: 'http://api.secure-notes.xyz'
             },
@@ -151,26 +171,45 @@ module.exports = function(grunt) {
         ]
       }
     },
+    copy: {
+      main: {
+        src: [
+          './public/css/**/*',
+          './public/dist/secure.notes.min.js',
+          './public/index.html',
+          './public/vendor/spin.js/spin.js',
+          './public/vendor/angular-spinner/angular-spinner.min.js',
+          './public/vendor/angular-google-plus/dist/angular-google-plus.min.js',
+          './public/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js'
+        ],
+        expand: true,
+        // cwd: 'dev',
+        dest: 'production-code',
+      }
+    },
     ngAnnotate: {
         options: {
-            singleQuotes: true
+          add: true,
+          singleQuotes: true
         },
         all: {
-            files: {
-                'public/dist/annotate.js': './public/app/**/*.js'
-            }
+          src: ['./public/app/**/*.js', 'public/config/**/*.js']
+            // files: {
+            //     'public/dist/annotate.js': './public/app/**/*.js'
+            // }
         }
     },
-    'sftp-deploy': {
+    'ftp-deploy': {
       build: {
         auth: {
-          host: 'avantime.at',
-          port: 22,
+          host: 'ftp.keycdn.com',
+          port: 21,
           authKey: 'privateKeyCustom'
         },
         cache: false,
-        src: './public',
-        dest: '/var/www/secure-notes.xyz/',
+        src: './production-code/public',
+        dest: '/securenotes/',
+        forceVerbose: true,
         progress: true
       }
     }
@@ -184,10 +223,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-sftp-deploy');
+  grunt.loadNpmTasks('grunt-ftp-deploy');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('develop', ['replace:dev', 'html2js', 'uglify:dev', 'watch']);
-  grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production', 'sftp-deploy']);
+  grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production', 'copy', 'ftp-deploy']);
+  // grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production', 'ftp-deploy']);
+  // grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production']);
 
 };

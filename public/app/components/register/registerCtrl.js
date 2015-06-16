@@ -1,5 +1,5 @@
 angular.module('app.components.register.ctrl', [])
-    .controller('registerCtrl', function ($scope, registerService, $state) {
+    .controller('registerCtrl', ['$scope', 'registerService', '$state', function ($scope, registerService, $state) {
         'use strict';
         $scope.errors = {
             message: null
@@ -24,4 +24,4 @@ angular.module('app.components.register.ctrl', [])
                 });
             }
         };
-    });
+    }]);

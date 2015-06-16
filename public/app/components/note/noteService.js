@@ -1,5 +1,5 @@
 angular.module('app.components.note.service', [])
-    .factory('noteService', function (noteResource) {
+    .factory('noteService', ['noteResource', function (noteResource) {
         'use strict';
         return {
             getAll: function () {
@@ -7,4 +7,4 @@ angular.module('app.components.note.service', [])
                     .$promise;
             }
         };
-    });
+    }]);

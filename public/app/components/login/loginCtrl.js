@@ -1,5 +1,5 @@
 angular.module('app.components.login.ctrl', [])
-    .controller('loginCtrl', function (
+    .controller('loginCtrl', ['$scope', '$state', 'loginResource', 'userService', 'GooglePlus', function (
         $scope,
         $state,
         loginResource,
@@ -74,4 +74,4 @@ angular.module('app.components.login.ctrl', [])
                 });
         };
 
-    });
+    }]);

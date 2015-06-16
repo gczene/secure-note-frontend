@@ -1,5 +1,5 @@
 angular.module('app.components.auth.ctrl', [])
-    .controller('authCtrl', function ($scope, $state, $rootScope, userService, $http, config) {
+    .controller('authCtrl', ['$scope', '$state', '$rootScope', 'userService', '$http', 'config', function ($scope, $state, $rootScope, userService, $http, config) {
         'use strict';
 
         $http.get(config.apiUrl);
@@ -29,4 +29,4 @@ angular.module('app.components.auth.ctrl', [])
 
         $scope.myEmail = $scope.myEmail + 'r@';
         $scope.myEmail = $scope.myEmail + 'czene.co.uk';
-    });
+    }]);

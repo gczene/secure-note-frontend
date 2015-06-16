@@ -1,12 +1,12 @@
 angular.module('app.components.home.ctrl', [])
-    .controller('homeCtrl', function (
+    .controller('homeCtrl', ['$scope', '$modal', function (
         $scope,
         $modal
     ) {
         'use strict';
         console.log('home ctrl');
-    })
-    .controller('tryItCtrl', function ($scope, $state, $location, $rootScope) {
+    }])
+    .controller('tryItCtrl', ['$scope', '$state', '$location', '$rootScope', function ($scope, $state, $location, $rootScope) {
         'use strict';
 
 
@@ -29,4 +29,4 @@ angular.module('app.components.home.ctrl', [])
             }
         };
 
-    });
+    }]);

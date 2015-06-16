@@ -1,5 +1,5 @@
 angular.module('app.components.paypal.done.ctrl', [])
-    .controller('paypalDoneCtrl', function (userService, loginService, $state) {
+    .controller('paypalDoneCtrl', ['userService', 'loginService', '$state', function (userService, loginService, $state) {
         'use strict';
         var session = userService.getSession();
 
@@ -14,4 +14,4 @@ angular.module('app.components.paypal.done.ctrl', [])
                     $state.go('notes');
                 });
         }
-    });
+    }]);

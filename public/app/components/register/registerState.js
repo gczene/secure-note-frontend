@@ -1,5 +1,5 @@
 angular.module('app.components.register.state', [])
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         'use strict';
         $stateProvider
             .state('register', {
@@ -15,4 +15,4 @@ angular.module('app.components.register.state', [])
                 }
 
             });
-    });
+    }]);

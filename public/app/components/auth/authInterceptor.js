@@ -1,9 +1,9 @@
 angular.module('app.components.auth.interceptor', [])
-    .config(function ($httpProvider) {
+    .config(['$httpProvider', function ($httpProvider) {
         'use strict';
         $httpProvider.interceptors.push('authInterceptor');
-    })
-    .factory('authInterceptor', function ($q, userService) {
+    }])
+    .factory('authInterceptor', ['$q', 'userService', function ($q, userService) {
         'use strict';
 
         return {
@@ -26,4 +26,4 @@ angular.module('app.components.auth.interceptor', [])
                 return $q.reject(rejection);
             }
         };
-    });
+    }]);

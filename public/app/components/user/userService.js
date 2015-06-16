@@ -1,5 +1,5 @@
 angular.module('app.components.user.service', [])
-    .factory('userService', function ($window) {
+    .factory('userService', ['$window', function ($window) {
         'use strict';
 
         return {
@@ -19,4 +19,4 @@ angular.module('app.components.user.service', [])
                 $window.sessionStorage.removeItem('user');
             }
         };
-    });
+    }]);

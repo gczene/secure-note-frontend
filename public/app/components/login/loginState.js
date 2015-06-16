@@ -1,5 +1,5 @@
 angular.module('app.components.login.state', [])
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         'use strict';
         $stateProvider
             .state('login', {
@@ -14,4 +14,4 @@ angular.module('app.components.login.state', [])
                     }
                 }
             });
-    });
+    }]);

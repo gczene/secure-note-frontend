@@ -1,5 +1,5 @@
 angular.module('app.components.login.resource', [])
-    .factory('loginResource', function ($resource, config) {
+    .factory('loginResource', ['$resource', 'config', function ($resource, config) {
         'use strict';
 
         return $resource(config.apiUrl + '/auth', {}, {
@@ -15,4 +15,4 @@ angular.module('app.components.login.resource', [])
             }
         });
 
-    });
+    }]);

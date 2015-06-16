@@ -1,6 +1,6 @@
 angular.module('app.state', [])
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         'use strict';
         $urlRouterProvider.otherwise("/");
         $stateProvider
@@ -19,4 +19,4 @@ angular.module('app.state', [])
                 parent: 'parent',
                 url: "/"
             });
-    });
+    }]);

@@ -1,6 +1,6 @@
 angular.module('app.components.note.state', [])
 
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         'use strict';
         $stateProvider
             .state('notes', {
@@ -18,4 +18,4 @@ angular.module('app.components.note.state', [])
                     }
                 }
             });
-    });
+    }]);

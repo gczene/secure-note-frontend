@@ -1,5 +1,5 @@
 angular.module('app.components.navbar.ctrl', [])
-    .controller('navbarCtrl', function ($scope, userService) {
+    .controller('navbarCtrl', ['$scope', 'userService', function ($scope, userService) {
         'use strict';
         return;
-    });
+    }]);

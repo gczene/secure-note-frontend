@@ -1,5 +1,5 @@
 angular.module('app.components.error.service', [])
-    .factory('errorService', function (userService, $state) {
+    .factory('errorService', ['userService', '$state', function (userService, $state) {
         'use strict';
 
         return {
@@ -14,4 +14,4 @@ angular.module('app.components.error.service', [])
             }
         };
 
-    });
+    }]);

@@ -1,5 +1,5 @@
 angular.module('app.components.register.service', [])
-    .factory('registerService', function (registerResource) {
+    .factory('registerService', ['registerResource', function (registerResource) {
         'use strict';
         var errors = {};
 
@@ -30,4 +30,4 @@ angular.module('app.components.register.service', [])
                     .$promise;
             }
         };
-    });
+    }]);

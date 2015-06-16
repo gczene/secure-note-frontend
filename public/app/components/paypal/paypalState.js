@@ -1,5 +1,5 @@
 angular.module('app.components.paypal.state', [])
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
         'use strict';
         $stateProvider
             .state('paypalDone', {
@@ -14,4 +14,4 @@ angular.module('app.components.paypal.state', [])
                 }
 
             });
-    });
+    }]);

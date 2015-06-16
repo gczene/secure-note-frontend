@@ -1,5 +1,5 @@
 angular.module('app.components.note.ctrl', [])
-    .controller('noteCtrl', function (
+    .controller('noteCtrl', ['$scope', 'usSpinnerService', 'noteResource', 'noteService', 'errorService', 'userService', '$modal', 'config', function (
         $scope,
         usSpinnerService,
         noteResource,
@@ -114,8 +114,8 @@ angular.module('app.components.note.ctrl', [])
             });
         };
 
-    })
-    .controller('detailsCtrl', function ($scope, $modalInstance, note, noteResource, $window, key) {
+    }])
+    .controller('detailsCtrl', ['$scope', '$modalInstance', 'note', 'noteResource', '$window', 'key', function ($scope, $modalInstance, note, noteResource, $window, key) {
         'use strict';
         $scope.note = note;
         $scope.editing = false;
@@ -150,8 +150,8 @@ angular.module('app.components.note.ctrl', [])
             $scope.editing = false;
         };
 
-    })
-    .filter('nl2br', function ($sce) {
+    }])
+    .filter('nl2br', ['$sce', function ($sce) {
         'use strict';
 
         return function (msg, is_xhtml) {
@@ -161,4 +161,4 @@ angular.module('app.components.note.ctrl', [])
                 .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
             return $sce.trustAsHtml(msg);
         };
-    });
+    }]);
