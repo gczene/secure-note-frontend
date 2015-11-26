@@ -208,9 +208,20 @@ module.exports = function(grunt) {
         },
         cache: false,
         src: './production-code/public',
-        dest: '/securenotes/',
+        dest: '/',
         forceVerbose: true,
         progress: true
+      }
+    },
+    htmlmin: {                                     // Task
+      dist: {                                      // Target
+        options: {                                 // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {                                   // Dictionary of files
+          './production-code/public/index.html': './production-code/public/index.html'     // 'destination': 'source'
+        }
       }
     }
   });
@@ -225,11 +236,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sftp-deploy');
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('develop', ['replace:dev', 'html2js', 'uglify:dev', 'watch']);
-  grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production', 'copy', 'ftp-deploy']);
+  grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production', 'copy', 'htmlmin:dist', 'ftp-deploy']);
   // grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production', 'ftp-deploy']);
   // grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production']);
 
