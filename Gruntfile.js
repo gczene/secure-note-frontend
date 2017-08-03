@@ -135,7 +135,7 @@ module.exports = function(grunt) {
             },
             {
               match: 'apiUrl',
-              replacement: 'http://api.secure-notes.xyz'
+              replacement: 'https://api.secure-notes.xyz'
             },
             {
               match: 'bootstrapCss',
