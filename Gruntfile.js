@@ -151,7 +151,7 @@ module.exports = function(grunt) {
             },
             {
               match: 'angular-resource',
-              replacement: 'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js'
+              replacement: '//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.min.js'
             }
           ]
         },
