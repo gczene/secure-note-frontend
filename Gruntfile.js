@@ -241,7 +241,7 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
   grunt.registerTask('develop', ['replace:dev', 'html2js', 'uglify:dev', 'watch']);
-  grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production', 'copy', 'htmlmin:dist']);
+  grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production', 'copy', 'htmlmin:dist'/*, 'ftp-deploy'*/]);
   // grunt.registerTask('deploy', ['replace:production', 'ngAnnotate', 'uglify:production', 'ftp-deploy']);
   // grunt.registerTask('deploy', ['replace:production', 'html2js', 'uglify:production']);
 
